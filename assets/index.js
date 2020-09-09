@@ -1,4 +1,4 @@
-//import { v4 as uuidv4 } from 'uuid';
+/* global localStorage */
 
 const myLibrary = localStorage.getItem('books')
   ? JSON.parse(localStorage.getItem('books'))
@@ -12,7 +12,6 @@ function Book(title, pages, author, read) {
   this.pages = pages;
   this.author = author;
   this.read = read;
-  //this.id = uuidv4();
 }
 
 function addBookToLibrary(title, pages, author, read) {
@@ -41,6 +40,66 @@ let readBtn = document.createElement('button');
 newBookBtn.innerText = 'Add new book';
 
 
+function newBookAction() {
+const books = document.getElementsByClassName("book");
+const bookArr = [...books]
+bookArr.forEach((book) => {book.remove()});
+newBookBtn.remove();
+const form = document.createElement('form');
+form.id = "form"
+const authorInput = document.createElement('input');
+const authorLabel = document.createElement('label');
+authorLabel.innerText = "Author"
+authorInput.setAttribute("type", "text");
+authorInput.setAttribute("name", "author");
+authorInput.setAttribute("id", "author");
+const titleInput = document.createElement('input');
+const titleLabel = document.createElement('label');
+titleLabel.innerText = "Title"
+titleLabel.setAttribute("for", "title");
+titleInput.setAttribute("type", "text");
+titleInput.setAttribute("name", "title");
+titleInput.setAttribute("id", "title");
+const pageInput = document.createElement('input');
+const pageLabel = document.createElement('label');
+pageLabel.innerText = "Page"
+pageInput.setAttribute("type", "number");
+pageInput.setAttribute("name", "page");
+pageInput.setAttribute("id", "page");
+const readInput = document.createElement('input');
+const readLabel = document.createElement('label');
+readLabel.innerText = "Read"
+readInput.setAttribute("type", "checkbox");
+readInput.setAttribute("name", "read");
+readInput.setAttribute("id", "read");
+const submitBtn = document.createElement("button")
+submitBtn.setAttribute("type", "submit");
+submitBtn.innerText = "Submit"
+form.addEventListener("submit", function(event){
+  event.preventDefault();
+  submitData();
+})
+form.appendChild(authorLabel);
+form.appendChild(authorInput);
+form.appendChild(titleLabel);
+form.appendChild(titleInput);
+form.appendChild(pageLabel);
+form.appendChild(pageInput);
+form.appendChild(readLabel);
+form.appendChild(readInput);
+form.appendChild(submitBtn)
+content.appendChild(form)
+}
+newBookBtn.addEventListener("click", newBookAction);
+content.appendChild(newBookBtn);
+
+function deleteBook(id) {
+  myLibrary.splice(id, 1);
+  localStorage.setItem('books', JSON.stringify(myLibrary));
+  window.location.reload();
+}
+
+
 function displayBooks(bookArr) {
   bookArr.forEach((book, idx) => {
     bookDiv = bookDiv.cloneNode(false);
@@ -54,19 +113,24 @@ function displayBooks(bookArr) {
     let readBtnClone = readBtn.cloneNode(true);
     readBtnClone.onclick = function(){ return bookToggle(bookIdx); };
     
-    //readBtnClone.onclick = bookToggle(bookIdx);
     bookDiv.appendChild(page.cloneNode(true));
     bookDiv.appendChild(title.cloneNode(true));
     bookDiv.appendChild(author.cloneNode(true));
     bookDiv.appendChild(read.cloneNode(true));
     bookDiv.appendChild(readBtnClone);
+    let deleteBtn = document.createElement('button');
+    deleteBtn.innerText = "Delete Book";
+    deleteBtn.addEventListener("click", function() {
+      deleteBook(idx)
+    });
+    bookDiv.appendChild(deleteBtn);
 
     content.appendChild(bookDiv);
   });
 }
 
-function submitData(event) {
-  event.preventDefault();
+
+function submitData() {
   const title = document.getElementById('title').value;
   const author = document.getElementById('author').value;
   const page = document.getElementById('page').value;
@@ -74,8 +138,6 @@ function submitData(event) {
   return addBookToLibrary(title, page, author, read);
 }
 
-const form = document.getElementById('form');
-
-form.onsubmit = submitData;
 
 displayBooks(myLibrary);
+content.appendChild(newBookBtn);
