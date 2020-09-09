@@ -6,3 +6,21 @@
   display: grid;
   grid-template-columns: repeat(4, 1fr);
 }
+
+.libraryForm {
+    width: 30%;
+}
+
+.libraryForm input {
+    padding: 8px
+}
+
+.libraryForm label {
+   font-weight: bold; 
+   margin-top: 2px;
+   margin-bottom: 1px;
+}
+
+.wrapper label {
+    margin-right: 8px;
+}
