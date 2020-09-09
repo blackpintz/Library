@@ -54,7 +54,7 @@ function newBookAction() {
   content.remove();
   const form = document.createElement('form');
   form.id = 'form';
-  form.className = "libraryForm d-flex flex-column mx-auto"
+  form.className = 'libraryForm d-flex flex-column mx-auto';
   const authorInput = document.createElement('input');
   const authorLabel = document.createElement('label');
   authorLabel.innerText = 'Author';
@@ -74,8 +74,8 @@ function newBookAction() {
   pageInput.setAttribute('type', 'number');
   pageInput.setAttribute('name', 'page');
   pageInput.setAttribute('id', 'page');
-  const wrapper = document.createElement('div')
-  wrapper.className = "wrapper mt-1"
+  const wrapper = document.createElement('div');
+  wrapper.className = 'wrapper mt-1';
   const readInput = document.createElement('input');
   const readLabel = document.createElement('label');
   readLabel.innerText = 'Read';
@@ -85,7 +85,7 @@ function newBookAction() {
   wrapper.appendChild(readLabel);
   wrapper.appendChild(readInput);
   const submitBtn = document.createElement('button');
-  submitBtn.className = "btn btn-success"
+  submitBtn.className = 'btn btn-success';
   submitBtn.setAttribute('type', 'submit');
   submitBtn.innerText = 'Submit';
   form.addEventListener('submit', (event) => {
@@ -115,9 +115,9 @@ function displayBooks(bookArr) {
   bookArr.forEach((book, idx) => {
     bookDiv = bookDiv.cloneNode(false);
     title.innerHTML = book.title;
-    page.innerHTML = 'Pages: ' + book.pages;
-    author.innerHTML = 'Author: ' + book.author;
-    read.innerHTML = 'Status: ' + (book.read ? 'Read': 'Not Read');
+    page.innerHTML = `Pages: ${book.pages}`;
+    author.innerHTML = `Author: ${book.author}`;
+    read.innerHTML = `Status: ${book.read ? 'Read' : 'Not Read'}`;
     readBtn.innerText = book.read ? 'Unread' : 'Read';
     readBtn.setAttribute('data-book-index', idx);
     const bookIdx = readBtn.getAttribute('data-book-index');
@@ -131,7 +131,7 @@ function displayBooks(bookArr) {
     bookDiv.appendChild(readBtnClone);
     const deleteBtn = document.createElement('button');
     deleteBtn.innerText = 'Delete Book';
-    deleteBtn.className = "btn btn-secondary"
+    deleteBtn.className = 'btn btn-secondary';
     deleteBtn.addEventListener('click', () => {
       deleteBook(idx);
     });
@@ -143,4 +143,4 @@ function displayBooks(bookArr) {
 
 document.getElementById('nav-id').appendChild(newBookBtn);
 
-export {displayBooks, myLibrary}
+export { displayBooks, myLibrary };
