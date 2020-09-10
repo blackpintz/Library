@@ -1,29 +1,5 @@
-const myLibrary = localStorage.getItem('books')
-  ? JSON.parse(localStorage.getItem('books'))
-  : [];
-
-localStorage.setItem('books', JSON.stringify(myLibrary));
-JSON.parse(localStorage.getItem('books'));
-
-function Book(title, pages, author, read) {
-  this.title = title;
-  this.pages = pages;
-  this.author = author;
-  this.read = read;
-}
-
-function addBookToLibrary(title, pages, author, read) {
-  const book = new Book(title, pages, author, read);
-  myLibrary.push(book);
-  localStorage.setItem('books', JSON.stringify(myLibrary));
-  window.location.reload();
-}
-
-function bookToggle(idx) {
-  myLibrary[idx].read = !myLibrary[idx].read;
-  localStorage.setItem('books', JSON.stringify(myLibrary));
-  window.location.reload();
-}
+/* eslint-disable-next-line import/extensions */
+import * as storageModules from './storage.js';
 
 const content = document.getElementById('content');
 let bookDiv = document.createElement('div');
@@ -46,7 +22,7 @@ function submitData() {
   const author = document.getElementById('author').value;
   const page = document.getElementById('page').value;
   const read = document.getElementById('read').checked;
-  return addBookToLibrary(title, page, author, read);
+  return storageModules.addBookToLibrary(title, page, author, read);
 }
 
 function newBookAction() {
@@ -104,14 +80,8 @@ function newBookAction() {
 }
 newBookBtn.addEventListener('click', newBookAction);
 
-function deleteBook(id) {
-  myLibrary.splice(id, 1);
-  localStorage.setItem('books', JSON.stringify(myLibrary));
-  window.location.reload();
-}
 
-
-function displayBooks(bookArr) {
+export default function displayBooks(bookArr) {
   bookArr.forEach((book, idx) => {
     bookDiv = bookDiv.cloneNode(false);
     title.innerHTML = book.title;
@@ -122,7 +92,7 @@ function displayBooks(bookArr) {
     readBtn.setAttribute('data-book-index', idx);
     const bookIdx = readBtn.getAttribute('data-book-index');
     const readBtnClone = readBtn.cloneNode(true);
-    readBtnClone.onclick = () => bookToggle(bookIdx);
+    readBtnClone.onclick = () => storageModules.bookToggle(bookIdx);
 
     bookDiv.appendChild(title.cloneNode(true));
     bookDiv.appendChild(page.cloneNode(true));
@@ -133,7 +103,7 @@ function displayBooks(bookArr) {
     deleteBtn.innerText = 'Delete Book';
     deleteBtn.className = 'btn btn-secondary';
     deleteBtn.addEventListener('click', () => {
-      deleteBook(idx);
+      storageModules.deleteBook(idx);
     });
     bookDiv.appendChild(deleteBtn);
 
@@ -142,5 +112,3 @@ function displayBooks(bookArr) {
 }
 
 document.getElementById('nav-id').appendChild(newBookBtn);
-
-export { displayBooks, myLibrary };
