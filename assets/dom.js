@@ -17,7 +17,7 @@ readBtn.className = 'btn btn-info btn-sm';
 
 newBookBtn.innerText = 'Add new book';
 
-function submitData() {
+const submitData = () => {
   const title = document.getElementById('title').value;
   const author = document.getElementById('author').value;
   const page = document.getElementById('page').value;
@@ -25,7 +25,7 @@ function submitData() {
   return storageModules.addBookToLibrary(title, page, author, read);
 }
 
-function newBookAction() {
+const newBookAction = () => {
   const container = document.getElementById('page-container');
   content.remove();
   const form = document.createElement('form');
@@ -35,6 +35,7 @@ function newBookAction() {
   const authorLabel = document.createElement('label');
   authorLabel.innerText = 'Author';
   authorInput.setAttribute('type', 'text');
+  authorInput.required = true;
   authorInput.setAttribute('name', 'author');
   authorInput.setAttribute('id', 'author');
   const titleInput = document.createElement('input');
@@ -42,14 +43,17 @@ function newBookAction() {
   titleLabel.innerText = 'Title';
   titleLabel.setAttribute('for', 'title');
   titleInput.setAttribute('type', 'text');
+  titleInput.required = true;
   titleInput.setAttribute('name', 'title');
   titleInput.setAttribute('id', 'title');
   const pageInput = document.createElement('input');
   const pageLabel = document.createElement('label');
   pageLabel.innerText = 'Pages';
+  pageInput.required = true;
   pageInput.setAttribute('type', 'number');
   pageInput.setAttribute('name', 'page');
   pageInput.setAttribute('id', 'page');
+  pageInput.setAttribute('min', '100');
   const wrapper = document.createElement('div');
   wrapper.className = 'wrapper mt-1';
   const readInput = document.createElement('input');
@@ -81,7 +85,7 @@ function newBookAction() {
 newBookBtn.addEventListener('click', newBookAction);
 
 
-export default function displayBooks(bookArr) {
+export default (bookArr) => {
   bookArr.forEach((book, idx) => {
     bookDiv = bookDiv.cloneNode(false);
     title.innerHTML = book.title;
