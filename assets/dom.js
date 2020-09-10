@@ -23,7 +23,7 @@ const submitData = () => {
   const page = document.getElementById('page').value;
   const read = document.getElementById('read').checked;
   return storageModules.addBookToLibrary(title, page, author, read);
-}
+};
 
 const newBookAction = () => {
   const container = document.getElementById('page-container');
@@ -81,7 +81,7 @@ const newBookAction = () => {
   form.appendChild(wrapper);
   form.appendChild(submitBtn);
   container.appendChild(form);
-}
+};
 newBookBtn.addEventListener('click', newBookAction);
 
 
@@ -113,6 +113,6 @@ export default (bookArr) => {
 
     content.appendChild(bookDiv);
   });
-}
+};
 
 document.getElementById('nav-id').appendChild(newBookBtn);

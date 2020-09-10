@@ -2,6 +2,9 @@
 
 This project is about building a web application using JavaScript features (Objects, Object Constructors etc). We proactively used DOM manipulation to build the most of the part of application. You can add and delete books in this application using the buttons. You can also toggle the read status of the book.  
 
+## Screenshot
+![screenshot](assets/screenshot.png)
+
 ## Built With
 
 - HTML,
@@ -15,6 +18,22 @@ This project is about building a web application using JavaScript features (Obje
 ## Live Demo
 
 <a href="https://rawcdn.githack.com/blackpintz/Library/e63cdf57259fa98a092920a7c4588f5eacd9995a/index.html" target="_blank">Live version</a>
+
+
+## Getting Started
+
+To get a local copy up and running follow these simple example steps.
+
+## Prerequisites
+
+- Install node.
+
+## Set up
+
+- Clone the project.
+- Cd into the project directory.
+- Run ```npm install``` .
+- Open the index.html file on local host.
 
 ## Author
 
@@ -50,6 +69,5 @@ Give a ⭐️ if you like this project!
 - <a href="https://www.stackoverflow.com/" target="_blank">Stackoverflow</a>
 
 
-## Desktop
-![screenshot](assets/screenshot.png)
+
 
